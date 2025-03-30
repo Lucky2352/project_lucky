@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding-bottom: 50px;
+            margin: 0px;
+            padding: 0px;
+            font-family: 'poppins',sans-serif;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 100%;
+            height: 570px;
+            background: #e3f9ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calculator{
+                background: #71a4ec;
+                padding: 10px;
+                border-radius: 10px;
+        }
+        .calculator form input{
+            border: 0;
+            outline: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            box-shadow: -8px -8px 15px rgba(233, 60, 60, 0.1),5px 5px 15px rgba(226, 141, 141, 0.2);
+            background: transparent;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+            margin: 10px;
+        }
+        form .output{
+            display: flex;
+            justify-content: flex-end;
+            margin: 20px 0;
+        }
+        form .output input{
+            text-align: right;
+            flex: 1px;
+            font-size: 45px;
+            box-shadow: none;
+        }
+        form input.equal{
+                width: 145px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <form action="">
+                <div class="output">
+                    <input type="text" name="display" id="display"disabled>
+                </div>
+                <div>
+                    <input type="button" value="CLR" onclick="clearDisplay()">
+                    <input type="button" value="DEL" onclick="deleteLast()">
+                    <input type="button" value="." onclick="appendValue('.')">
+                    <input type="button" value="/" onclick="appendValue('/')">
+                </div>
+                <div>
+                    <input type="button" value="7" onclick="appendValue('7')">
+                <input type="button" value="8" onclick="appendValue('8')">
+                <input type="button" value="9" onclick="appendValue('9')">
+                <input type="button" value="*" onclick="appendValue('*')">
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="appendValue('4')">
+                <input type="button" value="5" onclick="appendValue('5')">
+                <input type="button" value="6" onclick="appendValue('6')">
+                <input type="button" value="-" onclick="appendValue('-')">
+                </div>
+                <div>
+                    <input type="button" value="1" onclick="appendValue('1')">
+                <input type="button" value="2" onclick="appendValue('2')">
+                <input type="button" value="3" onclick="appendValue('3')">
+                <input type="button" value="+" onclick="appendValue('+')">
+                </div>
+                <div>
+                    <input type="button" value="00" onclick="appendValue('00')">
+                <input type="button" value="0" onclick="appendValue('0')">
+                <input type="button" value="=" onclick="calculateResult()" class="equal">
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html><script>
+    let display = document.getElementById("display");
+
+    function appendValue(value) {
+        display.value += value;
+    }
+
+    function clearDisplay() {
+        display.value = "";
+    }
+
+    function deleteLast() {
+        display.value = display.value.toString().slice(0, -1);
+    }
+
+    function calculateResult() {
+        try {
+            display.value = Function("return " + display.value)();
+        } catch {
+            display.value = "Error";
+        }
+    }
+</script>
